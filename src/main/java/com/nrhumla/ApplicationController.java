@@ -1,11 +1,11 @@
 package com.nrhumla;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -16,10 +16,9 @@ import static java.util.stream.Collectors.toList;
 public class ApplicationController {
 
     @RequestMapping(value = "/fruits", method = RequestMethod.GET)
-    public ModelAndView getFruits(@RequestParam(value = "search", required = false) String search) {
-        ModelAndView modelAndView = new ModelAndView("fruits");
-        modelAndView.addObject("fruitBowl", search(search));
-        return modelAndView;
+    public String getFruits(@RequestParam(value = "search", required = false) String search, final Model model) {
+        model.addAttribute("fruitBowl", search(search));
+        return "fruits";
     }
 
     private List<String> search(String search) {
