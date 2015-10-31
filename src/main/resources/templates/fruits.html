@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mock MVC Demo</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" href="../static/css/bootstrap-theme.min.css" />
+</head>
+<body>
+<div class="container">
+    <h1>Demo application to test Spring MVC controllers</h1>
+    <table class="table">
+        <tbody>
+        <tr th:each="fruit : ${fruitBowl}">
+            <td th:text="${fruit}">Banana</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
