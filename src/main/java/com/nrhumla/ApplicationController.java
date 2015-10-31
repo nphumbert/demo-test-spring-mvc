@@ -22,7 +22,7 @@ public class ApplicationController {
         return modelAndView;
     }
 
-    private List<String> search(@RequestParam(value = "search", required = false) String search) {
+    private List<String> search(String search) {
         if (StringUtils.isEmpty(search)) {
             return fruitBowl();
         }
