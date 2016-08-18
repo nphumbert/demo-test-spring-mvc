@@ -1,6 +1,5 @@
-package com.nrhumla;
+package com.nrhumla.controller;
 
-import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.contains;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -10,18 +9,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.nrhumla.controller.FruitController;
+import com.nrhumla.WebMvcConfig;
+import com.nrhumla.mock.MockFruitService;
 import com.nrhumla.service.FruitService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(FruitController.class)
+@Import(WebMvcConfig.class)
 public class FruitControllerTest
 {
     @Autowired
@@ -33,8 +34,9 @@ public class FruitControllerTest
     @Before
     public void setUp()
     {
-        Mockito.when(fruitService.search(null)).thenReturn(asList("banana", "orange"));
-        Mockito.when(fruitService.search("ban")).thenReturn(asList("banana"));
+        MockFruitService.stub(fruitService)
+                .searchWithParam()
+                .searchWithoutParam();
     }
 
     @Test
